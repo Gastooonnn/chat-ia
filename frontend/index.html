@@ -1,87 +1,177 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat IA</title>
-
+    <title>Asistente de Viajes Uruguay</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
-
 <body>
-    <div class="app">
-
-        <aside class="sidebar">
-            <h2>✦ Chat IA</h2>
-
-            <button id="new-chat" class="new-chat">
-                + Nuevo chat
-            </button>
-
-            <p class="sidebar-label">Tus conversaciones</p>
-
-            <div id="chat-history"></div>
-
-            <div class="sidebar-footer">
-                Proyecto de aprendizaje
-            </div>
-        </aside>
-
-        <main class="chat">
-
-            <header class="chat-header">
-                <div class="avatar">✦</div>
-
-                <div>
-                    <h1>Asistente IA</h1>
-                    <span class="status">Tu asistente personal</span>
-                </div>
-            </header>
-
-            <section
-                id="messages"
-                class="messages"
-                aria-live="polite"
-                aria-label="Conversación"
-            >
-                <div class="welcome">
-                    <div class="welcome-icon">✦</div>
-
-                    <h2>¿En qué puedo ayudarte?</h2>
-
-                    <p>
-                        Escribí tu pregunta y comencemos
-                        una conversación.
-                    </p>
-                </div>
-            </section>
-
-            <form id="chat-form" class="chat-form">
-                <label class="sr-only" for="message-input">
-                    Escribí tu mensaje
-                </label>
-
-                <input
-                    type="text"
-                    id="message-input"
-                    placeholder="Escribí un mensaje..."
-                    autocomplete="off"
-                    required
-                >
-
-                <button type="submit" id="send-button">
-                    Enviar
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <a href="#" class="logo" aria-label="Asistente de Viajes Uruguay - Inicio">
+                <span class="logo-icon" aria-hidden="true" data-lucide="compass"></span>
+                <span class="logo-text">ASISTENTE DE VIAJES URUGUAY</span>
+            </a>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                    <span data-lucide="menu"></span>
                 </button>
-            </form>
+                <ul id="nav-menu" class="nav-list">
+                    <li><a href="#inicio" class="nav-link active">INICIO</a></li>
+                    <li><a href="#destinos" class="nav-link">DESTINOS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-            <p class="disclaimer">
-                La IA puede cometer errores. Verificá la información.
-            </p>
+    <main id="main-content">
+        <section id="inicio" class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1 id="hero-title">DESCUBRÍ URUGUAY CON TU ASISTENTE DE VIAJES</h1>
+                        <p class="hero-subtitle">Planificá tus próximas vacaciones. Descubrí lugares increíbles. Recibí recomendaciones personalizadas con inteligencia artificial.</p>
+                        <button id="start-chat-btn" class="btn btn-primary btn-lg" aria-label="Comenzar conversación con el asistente">
+                            <span data-lucide="message-square"></span>
+                            COMENZAR CONVERSACIÓN
+                        </button>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number" data-lucide="map-pin"></span>
+                                <span class="stat-label">8 DESTINOS</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-lucide="zap"></span>
+                                <span class="stat-label">IA EN TIEMPO REAL</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-lucide="shield-check"></span>
+                                <span class="stat-label">PRIVACIDAD TOTAL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-visual" aria-hidden="true">
+                        <div class="hero-image-wrapper">
+                            <img src="assets/images/hero.jpg" alt="Paisaje de Uruguay" class="hero-image">
+                            <div class="hero-overlay"></div>
+                        </div>
+                        <div class="hero-accent-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </main>
-    </div>
+        <section id="chat-section" class="chat-section" aria-labelledby="chat-title">
+            <div class="container">
+                <header class="chat-header-bar">
+                    <h2 id="chat-title">ASISTENTE DE VIAJES</h2>
+                    <p class="chat-subtitle">Escribí tu consulta y recibí recomendaciones personalizadas</p>
+                </header>
+                <div class="chat-container">
+                    <div id="messages" class="messages" aria-live="polite" aria-label="Conversación con el asistente">
+                        <div class="welcome">
+                            <div class="welcome-icon" aria-hidden="true" data-lucide="compass"></div>
+                            <h3>¡HOLA! SOY TU ASISTENTE DE VIAJES URUGUAY</h3>
+                            <p>Preguntame sobre destinos, playas, ciudades, actividades, gastronomía o pedime que organice tu itinerario personalizado.</p>
+                            <div class="suggestions" id="suggestions" role="list" aria-label="Sugerencias rápidas">
+                                <button type="button" class="suggestion-btn" data-suggestion="¿Qué puedo visitar en Montevideo?" role="listitem">
+                                    <span data-lucide="map-pin"></span>
+                                    ¿QUÉ PUEDO VISITAR EN MONTEVIDEO?
+                                </button>
+                                <button type="button" class="suggestion-btn" data-suggestion="Organizame un fin de semana en Punta del Este" role="listitem">
+                                    <span data-lucide="calendar"></span>
+                                    FIN DE SEMANA EN PUNTA DEL ESTE
+                                </button>
+                                <button type="button" class="suggestion-btn" data-suggestion="Quiero conocer las playas de Rocha" role="listitem">
+                                    <span data-lucide="waves"></span>
+                                    PLAYAS DE ROCHA
+                                </button>
+                                <button type="button" class="suggestion-btn" data-suggestion="Preparame un viaje económico por Uruguay" role="listitem">
+                                    <span data-lucide="wallet"></span>
+                                    VIAJE ECONÓMICO
+                                </button>
+                                <button type="button" class="suggestion-btn" data-suggestion="¿Qué lugares puedo conocer en Colonia del Sacramento?" role="listitem">
+                                    <span data-lucide="landmark"></span>
+                                    COLONIA DEL SACRAMENTO
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="chat-form" class="chat-form" aria-label="Formulario de chat">
+                        <label class="sr-only" for="message-input">Escribí tu mensaje</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" data-lucide="send" aria-hidden="true"></span>
+                            <input
+                                type="text"
+                                id="message-input"
+                                placeholder="ESCRIBÍ TU PREGUNTA SOBRE URUGUAY..."
+                                autocomplete="off"
+                                required
+                            >
+                        </div>
+                        <button type="submit" id="send-button" aria-label="Enviar mensaje" class="send-btn">
+                            <span data-lucide="arrow-right"></span>
+                        </button>
+                    </form>
+                    <p class="disclaimer">LA IA PUEDE COMETER ERRORES. VERIFICÁ LA INFORMACIÓN IMPORTANTE ANTES DE VIAJAR.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="destinos" class="destinations-section" aria-labelledby="destinations-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 id="destinations-title">DESTINOS DESTACADOS</h2>
+                    <p>Explorá los principales destinos turísticos de Uruguay y consultá al asistente para más detalles.</p>
+                    <div class="section-divider"></div>
+                </header>
+                <div class="destinations-grid" id="destinations-grid" role="list">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" aria-label="Asistente de Viajes Uruguay - Inicio">
+                        <span class="logo-icon" aria-hidden="true" data-lucide="compass"></span>
+                        <span class="logo-text">ASISTENTE DE VIAJES URUGUAY</span>
+                    </a>
+                    <p>Tu compañero inteligente para descubrir y planificar viajes por Uruguay.</p>
+                </div>
+                <nav class="footer-nav" aria-label="Enlaces del pie de página">
+                    <h4>NAVEGACIÓN</h4>
+                    <ul>
+                        <li><a href="#inicio">INICIO</a></li>
+                        <li><a href="#destinos">DESTINOS</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-info">
+                    <h4>TECNOLOGÍA</h4>
+                    <p>NODE.JS + EXPRESS + GROQ AI</p>
+                    <p>FRONTEND: HTML/CSS/JS PURO</p>
+                    <p>ICONOS: LUCIDE</p>
+                    <p>CÓDIGO ABIERTO EN <a href="https://github.com/Gastooonnn/chat-ia" target="_blank" rel="noopener">GITHUB</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> ASISTENTE DE VIAJES URUGUAY. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 </html>

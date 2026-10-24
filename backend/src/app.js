@@ -1,39 +1,25 @@
 require("dotenv").config();
-//importamos Express
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
-//importamos las rutas del chat
 const chatRoutes = require("./routes/chat.routes");
 
-//creamos nuestra aplicación
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Permitir peticiones desde el frontend- Configuración de CORS
 app.use(cors());
+app.use(express.json({ limit: "1mb" }));
 
-//le dice a Express que pueda recibir información en formato JSON
-app.use(express.json());
-/* Por ejemplo, si recibimos un POST con el siguiente cuerpo:
-{
-    "message": "¿Qué es JavaScript?"
-} 
-el backend podrá leerlo
-*/
+app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
-// Rutas
 app.use("/api/chat", chatRoutes);
 
-// Ruta inicial
 app.get("/", (req, res) => {
-    res.json({
-        message: "Backend Chat IA funcionando"
-    });
+  res.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
 });
 
-// Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+  console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });

@@ -1,54 +1,63 @@
 const express = require("express");
-/* const { generateResponse } =
-  require("../services/gemini.service"); */
-  const { generateResponse, listModels } =
-  require("../services/gemini.service");
+const { generateResponse } = require("../services/groq.service");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-    try {
-        const { message } = req.body;
+const MAX_MESSAGES = 20;
+const MAX_MESSAGE_LENGTH = 4000;
 
-        if (!message || !message.trim()) {
-            return res.status(400).json({
-                success: false,
-                message: "El mensaje no puede estar vacío."
-            });
-        }
+function validateMessages(messages) {
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return { valid: false, error: "Se requiere un array de mensajes." };
+  }
 
-        const response = await generateResponse(message);
-
-        res.json({
-            success: true,
-            response
-        });
-
-    } catch (error) {
-        console.error("Error al consultar Gemini:", error.message);
-
-        res.status(500).json({
-            success: false,
-            message: "No se pudo obtener una respuesta de la IA."
-        });
+  for (const msg of messages) {
+    if (!msg || typeof msg !== "object") {
+      return { valid: false, error: "Cada mensaje debe ser un objeto." };
     }
-});
+    if (!msg.role || !["user", "assistant", "system"].includes(msg.role)) {
+      return { valid: false, error: "Rol de mensaje inválido. Use 'user', 'assistant' o 'system'." };
+    }
+    if (!msg.content || typeof msg.content !== "string") {
+      return { valid: false, error: "El contenido del mensaje es requerido y debe ser texto." };
+    }
+    if (msg.content.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `El mensaje excede el límite de ${MAX_MESSAGE_LENGTH} caracteres.` };
+    }
+  }
 
+  if (messages.length > MAX_MESSAGES) {
+    return { valid: false, error: `El historial excede el límite de ${MAX_MESSAGES} mensajes.` };
+  }
 
-router.get("/models", async (req, res) => {
+  return { valid: true };
+}
+
+router.post("/", async (req, res) => {
   try {
-    await listModels();
+    const { messages } = req.body;
+
+    const validation = validateMessages(messages);
+    if (!validation.valid) {
+      return res.status(400).json({
+        success: false,
+        message: validation.error
+      });
+    }
+
+    const response = await generateResponse(messages);
 
     res.json({
       success: true,
-      message: "Modelos mostrados en la consola."
+      response
     });
+
   } catch (error) {
-    console.error("Error al listar modelos:", error.message);
+    console.error("Error al consultar Groq:", error.message);
 
     res.status(500).json({
       success: false,
-      message: "No se pudieron obtener los modelos."
+      message: "No se pudo obtener una respuesta de la IA."
     });
   }
 });
