@@ -9,12 +9,9 @@
 | Proyecto | Asistente de Viajes Uruguay |
 | Tipo de entrega | Parcial 2 – Proyecto de Inteligencia Artificial |
 | Materia | Inteligencia Artificial |
-| Autor | [Completar] |
-| Docente | [Completar] |
-| Institución | [Completar] |
+| Autor | [Gaston Da Silva] |
 | Fecha | Octubre de 2026 |
 | Repositorio | https://github.com/Gastooonnn/chat-ia |
-| Versión del documento | 1.0 |
 
 > **Nota de consistencia.** Este documento describe el comportamiento real del código del repositorio. El `README.md` todavía menciona Google Gemini y una estructura anterior; la implementación activa utiliza **Groq** a través de `backend/src/services/groq.service.js`. Las diferencias se detallan en la sección 14.
 
