@@ -15,8 +15,8 @@ function validateMessages(messages) {
     if (!msg || typeof msg !== "object") {
       return { valid: false, error: "Cada mensaje debe ser un objeto." };
     }
-    if (!msg.role || !["user", "assistant", "system"].includes(msg.role)) {
-      return { valid: false, error: "Rol de mensaje inválido. Use 'user', 'assistant' o 'system'." };
+    if (!msg.role || !["user", "assistant"].includes(msg.role)) {
+      return { valid: false, error: "Rol de mensaje inválido. Use 'user' o 'assistant'." };
     }
     if (!msg.content || typeof msg.content !== "string") {
       return { valid: false, error: "El contenido del mensaje es requerido y debe ser texto." };
@@ -28,6 +28,10 @@ function validateMessages(messages) {
 
   if (messages.length > MAX_MESSAGES) {
     return { valid: false, error: `El historial excede el límite de ${MAX_MESSAGES} mensajes.` };
+  }
+
+  if (messages[messages.length - 1].role !== "user") {
+    return { valid: false, error: "El último mensaje debe ser del usuario." };
   }
 
   return { valid: true };

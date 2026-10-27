@@ -5,6 +5,7 @@ Una aplicación web para conversar con una inteligencia artificial especializada
 ## Características
 
 - **Chat con IA especializada**: Asistente turístico experto en Uruguay (Groq)
+- **Alcance acotado**: Solo responde consultas sobre viajes, turismo y temas relacionados
 - **Historial conversacional**: La IA recuerda el contexto de la conversación
 - **Sugerencias rápidas**: Botones predefinidos para consultas comunes
 - **Destinos destacados**: 8 destinos uruguayos con tarjetas informativas
@@ -121,7 +122,8 @@ Envía historial de conversación y recibe respuesta de la IA.
 **Validaciones:**
 - Máximo 20 mensajes en el historial
 - Máximo 4000 caracteres por mensaje
-- Roles permitidos: `user`, `assistant`, `system`
+- Roles permitidos: `user` y `assistant`
+- El último mensaje debe ser del usuario
 
 ## Seguridad implementada
 
