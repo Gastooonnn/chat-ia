@@ -54,7 +54,7 @@ async function generateResponse(messages) {
   ];
 
   const response = await groq.chat.completions.create({
-    model: process.env.GROQ_MODEL || "qwen/qwen3.8-27b",
+    model: process.env.GROQ_MODEL || "openai/gpt-oss-120b",
     messages: formattedMessages,
     temperature: 0.7,
     max_tokens: 2048

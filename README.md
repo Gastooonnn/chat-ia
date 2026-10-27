@@ -71,7 +71,7 @@ Crear archivo `backend/.env` basado en `.env.example`:
 ```env
 PORT=3000
 GROQ_API_KEY=tu_clave_api_aqui
-GROQ_MODEL=qwen/qwen3.8-27b
+GROQ_MODEL=openai/gpt-oss-120b
 ```
 
 > El modelo configurado en `GROQ_MODEL` debe estar disponible en tu cuenta de Groq.
@@ -137,7 +137,7 @@ Envía historial de conversación y recibe respuesta de la IA.
 ## Personalización
 
 ### Cambiar modelo de IA
-Editar `GROQ_MODEL` en `.env` (ej: `qwen/qwen3.8-27b`)
+Editar `GROQ_MODEL` en `.env` (ej: `openai/gpt-oss-120b`; alternativa: `openai/gpt-oss-20b`)
 
 ### Modificar prompt del sistema
 Editar `SYSTEM_PROMPT` en `backend/src/services/groq.service.js`
