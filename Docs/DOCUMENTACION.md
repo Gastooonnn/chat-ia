@@ -404,8 +404,8 @@ Los roles que el backend acepta son `user` y `assistant`. El frontend solo gener
 | Proveedor | Groq |
 | SDK | `groq-sdk` `^0.5.0` |
 | Archivo de integración | `backend/src/services/groq.service.js` |
-| Modelo de respaldo en código | `openai/gpt-oss-120b` |
-| Modelo sugerido en `.env.example` | `openai/gpt-oss-120b` |
+| Modelo de respaldo en código | `qwen/qwen3.8-27b` |
+| Modelo sugerido en `.env.example` | `qwen/qwen3.8-27b` |
 | Variable de entorno del modelo | `GROQ_MODEL` |
 | Temperatura | `0.7` |
 | Máximo de tokens de salida | `2048` |
@@ -414,7 +414,7 @@ Los roles que el backend acepta son `user` y `assistant`. El frontend solo gener
 El modelo se selecciona así:
 
 ```javascript
-model: process.env.GROQ_MODEL || "openai/gpt-oss-120b"
+model: process.env.GROQ_MODEL || "qwen/qwen3.8-27b"
 ```
 
 Por lo tanto, el valor de `.env` tiene prioridad. Si no se configura, se usa el valor de respaldo del código. Es importante verificar que el modelo elegido esté disponible en la cuenta de Groq utilizada.
@@ -444,7 +444,7 @@ La llamada al modelo es:
 
 ```javascript
 const response = await groq.chat.completions.create({
-  model: process.env.GROQ_MODEL || "openai/gpt-oss-120b",
+  model: process.env.GROQ_MODEL || "qwen/qwen3.8-27b",
   messages: formattedMessages,
   temperature: 0.7,
   max_tokens: 2048
@@ -787,10 +787,10 @@ Editar `backend/.env`:
 ```env
 PORT=3000
 GROQ_API_KEY=tu_clave_api_de_groq
-GROQ_MODEL=openai/gpt-oss-120b
+GROQ_MODEL=qwen/qwen3.8-27b
 ```
 
-> El valor de `GROQ_MODEL` debe corresponder a un modelo disponible en la cuenta. El código usa `openai/gpt-oss-120b` como respaldo si la variable no está definida.
+> El valor de `GROQ_MODEL` debe corresponder a un modelo disponible en la cuenta. El código usa `qwen/qwen3.8-27b` como respaldo si la variable no está definida.
 
 ### 11.3 Obtener la API key
 
@@ -1079,7 +1079,7 @@ Tu especialidad es el turismo uruguayo. Prioriza respuestas claras, útiles, org
 |---|---|---|---|
 | `PORT` | No | Puerto del servidor Express | `3000` |
 | `GROQ_API_KEY` | Sí | Clave de acceso a la API de Groq | `tu_clave` |
-| `GROQ_MODEL` | No | Modelo utilizado por el servicio | `openai/gpt-oss-120b` |
+| `GROQ_MODEL` | No | Modelo utilizado por el servicio | `qwen/qwen3.8-27b` |
 
 El archivo `.env` no debe subirse al repositorio. `.gitignore` ya lo excluye.
 
