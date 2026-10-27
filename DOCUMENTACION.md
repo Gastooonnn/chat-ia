@@ -11,7 +11,8 @@
 | Materia | Inteligencia Artificial |
 | Autor | [Gaston Da Silva] |
 | Fecha | Octubre de 2026 |
-| Repositorio | https://github.com/Gastooonnn/chat-ia |
+| Sitio web | [https://chat-ia-seven-mu.vercel.app/](https://chat-ia-seven-mu.vercel.app/) |
+| Repositorio | [https://github.com/Gastooonnn/chat-ia](https://github.com/Gastooonnn/chat-ia) |
 
 > **Nota de consistencia.** Este documento describe el comportamiento real del código del repositorio. El `README.md` todavía menciona Google Gemini y una estructura anterior; la implementación activa utiliza **Groq** a través de `backend/src/services/groq.service.js`. Las diferencias se detallan en la sección 14.
 
@@ -812,6 +813,8 @@ La aplicación queda disponible en:
 http://localhost:3000
 ```
 
+La versión desplegada está disponible en [https://chat-ia-seven-mu.vercel.app/](https://chat-ia-seven-mu.vercel.app/).
+
 ### 11.5 Verificación rápida
 
 1. Abrir `http://localhost:3000`.
@@ -1064,7 +1067,8 @@ El archivo `.env` no debe subirse al repositorio. `.gitignore` ya lo excluye.
 ### Anexo C. Referencias
 
 - Enunciado del parcial: `PARCIAL 2 – PROYECTO DE INTELIGENCIA ARTIFICIAL.pdf`.
-- Repositorio del proyecto: https://github.com/Gastooonnn/chat-ia
+- Sitio web desplegado: [https://chat-ia-seven-mu.vercel.app/](https://chat-ia-seven-mu.vercel.app/)
+- Repositorio del proyecto: [https://github.com/Gastooonnn/chat-ia](https://github.com/Gastooonnn/chat-ia)
 - Documentación de Express: https://expressjs.com/
 - Documentación de Node.js: https://nodejs.org/
 - Consola y documentación de Groq: https://console.groq.com/
