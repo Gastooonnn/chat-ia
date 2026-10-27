@@ -4,18 +4,18 @@ Una aplicación web para conversar con una inteligencia artificial especializada
 
 ## Características
 
-- **Chat con IA especializada**: Asistente turístico experto en Uruguay (Google Gemini)
+- **Chat con IA especializada**: Asistente turístico experto en Uruguay (Groq)
 - **Historial conversacional**: La IA recuerda el contexto de la conversación
 - **Sugerencias rápidas**: Botones predefinidos para consultas comunes
 - **Destinos destacados**: 8 destinos uruguayos con tarjetas informativas
 - **Diseño responsive**: Funciona en móvil, tablet y escritorio
-- **Seguridad**: API key solo en backend, validación de entradas, rate limiting básico
+- **Seguridad**: API key solo en backend, validación de entradas y límite de tamaño del payload
 
 ## Tecnologías
 
 - **Frontend**: HTML5, CSS3, JavaScript vanilla (ES6+)
 - **Backend**: Node.js, Express.js
-- **IA**: Google Gemini API (@google/genai)
+- **IA**: Groq API (groq-sdk)
 - **Fuente**: Inter (Google Fonts)
 
 ## Estructura del proyecto
@@ -28,7 +28,7 @@ chat-ia/
 │   │   ├── routes/
 │   │   │   └── chat.routes.js  # POST /api/chat
 │   │   └── services/
-│   │       └── gemini.service.js  # Integración con Gemini
+│   │       └── groq.service.js  # Integración con Groq
 │   ├── .env.example
 │   └── package.json
 ├── frontend/
@@ -45,7 +45,7 @@ chat-ia/
 
 - Node.js 18+
 - npm
-- Cuenta en Google AI Studio para obtener API key de Gemini
+- Cuenta en Groq para obtener una API key
 
 ## Instalación
 
@@ -60,7 +60,7 @@ npm install
 
 # Configurar variables de entorno
 cp .env.example .env
-# Editar .env y agregar tu GEMINI_API_KEY
+# Editar .env y agregar tu GROQ_API_KEY
 ```
 
 ## Configuración
@@ -69,15 +69,17 @@ Crear archivo `backend/.env` basado en `.env.example`:
 
 ```env
 PORT=3000
-GEMINI_API_KEY=tu_clave_api_aqui
-GEMINI_MODEL=gemini-2.5-flash
+GROQ_API_KEY=tu_clave_api_aqui
+GROQ_MODEL=qwen/qwen3.8-27b
 ```
 
-### Obtener API Key de Gemini
+> El modelo configurado en `GROQ_MODEL` debe estar disponible en tu cuenta de Groq.
 
-1. Ir a [Google AI Studio](https://aistudio.google.com/)
-2. Iniciar sesión con cuenta de Google
-3. Crear nueva API key
+### Obtener API Key de Groq
+
+1. Ir a [Groq Console](https://console.groq.com/)
+2. Iniciar sesión o crear una cuenta
+3. Crear una nueva API key
 4. Copiar y pegar en `backend/.env`
 
 ## Ejecución
@@ -128,15 +130,15 @@ Envía historial de conversación y recibe respuesta de la IA.
 - Límite de historial de conversación
 - Sanitización de salida en frontend (textContent)
 - CORS configurado
-- Rate limiting básico (body-parser limit 1mb)
+- Límite de tamaño del cuerpo JSON (1 MB)
 
 ## Personalización
 
 ### Cambiar modelo de IA
-Editar `GEMINI_MODEL` en `.env` (ej: `gemini-2.5-pro`)
+Editar `GROQ_MODEL` en `.env` (ej: `qwen/qwen3.8-27b`)
 
 ### Modificar prompt del sistema
-Editar `SYSTEM_PROMPT` en `backend/src/services/gemini.service.js`
+Editar `SYSTEM_PROMPT` en `backend/src/services/groq.service.js`
 
 ### Agregar/quitar destinos
 Modificar array `destinations` en `frontend/js/app.js`
